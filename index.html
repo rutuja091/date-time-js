@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Difference Between Two Date's</title>
+  
+    <style>  
+        body{  
+            background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+            min-height: 100vh;
+            text-align: center;
+            font-size: 48px;
+        }
+        .container{
+            background-color: white;
+            height: 300px;
+            padding-top: 25px;
+            width:800px;
+            border-radius: 20px;
+            border: 1px solid black;
+            margin: 10% auto;
+            
+        }
+        .head-name{
+            color:black;
+
+        }
+        .date-box{
+             height: 30px;
+             width:200px;
+             justify-content: center;
+             text-align: center;
+             border: 1px solid black;
+             border-radius: 10px;
+             font-size:20px;
+             cursor: pointer;
+             margin:7px;
+           
+        }
+        .btn-cont{
+            height: 28px;
+            width: 180px;
+            color: white;
+            font-size:20px;
+            border-radius: 20px;
+            background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+            cursor: pointer;
+            border: none;
+            margin: 20px;
+        }
+        .result-container{
+            font-weight: 700;
+            padding-top: 30px;
+            color: white;
+           
+           
+        }
+
+        @media screen and (max-width:768px) 
+        {
+            .container{
+                font-size:40px;
+                width: 80%;
+            }
+            .btn-cont{
+                width: 130px;
+                margin-bottom: 10px;
+                height: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <label  class="head-name"for="date">Enter Two Date's And Calculate Difference Between:</label>
+        <br></br>
+        <input type="date" id="dateone" class="date-box">
+        <input type="date" id="datetwo" class="date-box">
+        <br>
+        <button onclick="calculation()" class="btn-cont">Calculate</button>
+        <button type="button" class="btn-cont" onclick="reset()">Reset</button>
+        <p id="calculation" class="result-container"></p>
+    </div>
+   
+    <script>
+        function calculation(){
+            const dateone_input = document.getElementById('dateone').value;
+            const dateone = new Date(dateone_input);
+            const datetwo_input = document.getElementById('datetwo').value;
+            const datetwo = new Date(datetwo_input);
+
+            let startDate= null;
+            let endDate=null;
+            let yearDifferent =null;
+            let monthDifferent = null;
+            let dateDifferent=null;
+
+            if(dateone>datetwo)
+            {
+               startDate=datetwo;
+               endDate=new Date(dateone.getFullYear(),dateone.getMonth(),dateone.getDate()-1,);
+               yearDifferent=endDate.getFullYear()-startDate.getFullYear();
+               monthDifferent=endDate.getMonth()-startDate.getMonth();
+               dateDifferent=endDate.getDate()-startDate.getDate();
+            }
+            else if(dateone < datetwo)
+            {
+                startDate=dateone;
+               endDate=new Date(datetwo.getFullYear(),datetwo.getMonth(),datetwo.getDate()-1,);
+               yearDifferent=endDate.getFullYear()-startDate.getFullYear();
+               monthDifferent=endDate.getMonth()-startDate.getMonth();
+               dateDifferent=endDate.getDate()-startDate.getDate();
+            }
+            document.getElementById('calculation').innerText=`${yearDifferent} Years , ${monthDifferent} Months , And ${dateDifferent} Days `;   
+        }
+        function reset(){
+            const input1=document.getElementById("dateone");
+            const input2=document.getElementById("datetwo");
+            const result=document.getElementById("calculation");
+            input1.value="";
+            input2.value="";
+            result.innerText="";
+        }     
+    </script>
+</body>
+</html>
